@@ -169,21 +169,33 @@
 
 <header class="main-header">
 
-    <div class="container-fluid px-lg-5">
+    <div class="container-fluid px-3 px-lg-5">
 
         <nav class="navbar navbar-expand-lg">
 
-            <!-- LOGO -->
-            <a class="navbar-brand" href="#">
+            <!-- =================================================
+                 LOGO
+            ================================================== -->
+
+            <a
+                href="#"
+                class="navbar-brand bs-logo-link"
+                aria-label="BootService Store"
+            >
+
                 <img
                     src="img/logo-horizontal.png"
-                    alt="BootService"
+                    alt="BootService Store"
                     class="logo"
                 >
+
             </a>
 
 
-            <!-- Botón móvil -->
+            <!-- =================================================
+                 BOTÓN MOBILE
+            ================================================== -->
+
             <button
                 class="navbar-toggler"
                 type="button"
@@ -193,67 +205,148 @@
                 aria-expanded="false"
                 aria-label="Abrir menú"
             >
-                <i class="bi bi-list"></i>
+
+                <i class="fa-solid fa-bars"></i>
+
             </button>
 
 
-            <!-- CONTENIDO NAVBAR -->
-            <div class="collapse navbar-collapse" id="mainNavbar">
+            <!-- =================================================
+                 CONTENIDO
+            ================================================== -->
 
-                <!-- BUSCADOR -->
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar"
+            >
 
-                <form class="search-wrapper mx-lg-4 my-3 my-lg-0">
 
-                    <input
-                        type="search"
-                        class="form-control"
-                        placeholder="Buscar productos..."
-                        aria-label="Buscar productos"
-                    >
+                <!-- =================================================
+                     BUSCADOR
+                ================================================== -->
 
-                    <button type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
+                <form
+                    class="search-wrapper"
+                    id="searchForm"
+                >
+
+                    <div class="search-box">
+
+
+                        <!-- SELECT CATEGORÍAS -->
+
+                        <div class="search-category">
+
+                            <i class="fa-solid fa-layer-group"></i>
+
+                            <select
+                                id="searchCategory"
+                                aria-label="Seleccionar categoría"
+                            >
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- INPUT -->
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="¿Qué estás buscando?"
+                            autocomplete="off"
+                            aria-label="Buscar productos"
+                        >
+
+
+                        <!-- BOTÓN -->
+
+                        <button
+                            type="submit"
+                            class="search-button"
+                            aria-label="Buscar"
+                        >
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </button>
+
+                    </div>
 
                 </form>
 
 
-                <!-- ACCIONES -->
+                <!-- =================================================
+                     ACCIONES
+                ================================================== -->
 
-                <div class="navbar-actions ms-lg-auto">
+                <div class="navbar-actions">
 
-                    <!-- Cuenta -->
 
-                    <a href="#" class="nav-action">
+                    <!-- MI CUENTA -->
 
-                        <i class="bi bi-person"></i>
+                    <a
+                        href="#"
+                        class="nav-action"
+                    >
 
-                        <span>
-                            <small>Hola, ingresa</small>
-                            Mi cuenta
-                        </span>
+                        <div class="nav-action-icon">
+
+                            <i class="fa-regular fa-user"></i>
+
+                        </div>
+
+                        <div class="nav-action-content">
+
+                            <small>
+                                Hola, ingresa
+                            </small>
+
+                            <strong>
+                                Mi cuenta
+                            </strong>
+
+                        </div>
 
                     </a>
 
 
-                    <!-- Carrito -->
+                    <!-- CARRITO -->
 
-                    <a href="#" class="nav-action cart-action">
+                    <a
+                        href="#"
+                        class="nav-action cart-action"
+                    >
 
-                        <div class="cart-icon">
+                        <div class="nav-action-icon cart-icon">
 
-                            <i class="bi bi-cart3"></i>
+                            <i class="fa-solid fa-cart-shopping"></i>
 
-                            <span class="cart-count">
+                            <span
+                                class="cart-count"
+                                id="cartCount"
+                            >
                                 0
                             </span>
 
                         </div>
 
-                        <span>
-                            <small>Compras</small>
-                            Mi carrito
-                        </span>
+                        <div class="nav-action-content">
+
+                            <small>
+                                Tus compras
+                            </small>
+
+                            <strong>
+                                Mi carrito
+                            </strong>
+
+                        </div>
 
                     </a>
 
@@ -272,55 +365,101 @@
      MENÚ DE CATEGORÍAS
 ========================================================= -->
 
-<div class="category-menu">
+<section class="category-menu">
 
-    <div class="container-fluid px-lg-5">
+    <div class="container-fluid px-3 px-lg-5">
 
         <nav class="category-nav">
 
-            <a href="#">
-                <i class="bi bi-grid"></i>
-                Todas las categorías
-            </a>
 
-            <a href="#">
-                Computadoras
-            </a>
+            <!-- TODAS LAS CATEGORÍAS -->
 
-            <a href="#">
-                Laptops
-            </a>
+            <div class="category-mega-wrapper">
 
-            <a href="#">
-                Componentes
-            </a>
+                <button
+                    type="button"
+                    class="category-main-button"
+                    id="categoryMainButton"
+                    aria-expanded="false"
+                >
 
-            <a href="#">
-                Gaming
-            </a>
+                    <i class="fa-solid fa-bars"></i>
 
-            <a href="#">
-                Impresoras
-            </a>
+                    <span>
+                        Todas las categorías
+                    </span>
 
-            <a href="#">
-                Software
-            </a>
+                    <i class="fa-solid fa-chevron-down category-arrow"></i>
 
-            <a href="#">
-                Accesorios
-            </a>
+                </button>
 
-            <a href="#">
-                Servicio técnico
-            </a>
+
+                <!-- =================================================
+                     MEGA MENU
+                ================================================== -->
+
+                <div
+                    class="mega-menu"
+                    id="megaMenu"
+                >
+
+                    <div class="mega-menu-inner">
+
+
+                        <!-- CATEGORÍAS -->
+
+                        <div
+                            class="mega-categories"
+                            id="megaCategories"
+                        >
+                        </div>
+
+
+                        <!-- SUBCATEGORÍAS -->
+
+                        <div
+                            class="mega-subcategories"
+                            id="megaSubcategories"
+                        >
+
+                            <div class="mega-placeholder">
+
+                                <i class="fa-solid fa-layer-group"></i>
+
+                                <h5>
+                                    Explora nuestras categorías
+                                </h5>
+
+                                <p>
+                                    Selecciona una categoría para
+                                    ver sus productos.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORÍAS DESTACADAS -->
+
+            <div
+                class="category-links"
+                id="categoryLinks"
+            >
+            </div>
+
 
         </nav>
 
     </div>
 
-</div>
-
+</section>
 
 <!-- =========================================================
      HERO
@@ -1472,6 +1611,7 @@
 <!-- JavaScript propio -->
 
 <script src="js/app.js"></script>
+<script src="js/navbar.js"></script>
 
 </body>
 </html>

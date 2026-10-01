@@ -1,0 +1,123 @@
+{
+    "categorias": [
+        {
+            "id": 1,
+            "nombre": "Computadoras",
+            "icono": "fa-solid fa-desktop",
+            "subcategorias": [
+                "PC de escritorio",
+                "All in One",
+                "Mini PC",
+                "Workstations",
+                "Computadoras empresariales"
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "Laptops",
+            "icono": "fa-solid fa-laptop",
+            "subcategorias": [
+                "Laptops empresariales",
+                "Laptops gaming",
+                "Ultrabooks",
+                "Laptops económicas",
+                "MacBook"
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Componentes",
+            "icono": "fa-solid fa-microchip",
+            "subcategorias": [
+                "Procesadores",
+                "Placas madre",
+                "Memorias RAM",
+                "Tarjetas gráficas",
+                "Discos SSD",
+                "Discos HDD",
+                "Fuentes de poder",
+                "Gabinetes"
+            ]
+        },
+        {
+            "id": 4,
+            "nombre": "Gaming",
+            "icono": "fa-solid fa-gamepad",
+            "subcategorias": [
+                "PC Gaming",
+                "Monitores Gaming",
+                "Teclados Gaming",
+                "Mouse Gaming",
+                "Audífonos Gaming",
+                "Sillas Gaming"
+            ]
+        },
+        {
+            "id": 5,
+            "nombre": "Redes",
+            "icono": "fa-solid fa-network-wired",
+            "subcategorias": [
+                "Routers",
+                "Switches",
+                "Access Point",
+                "Tarjetas de red",
+                "Cables de red",
+                "Conectores RJ45",
+                "Racks"
+            ]
+        },
+        {
+            "id": 6,
+            "nombre": "Impresoras",
+            "icono": "fa-solid fa-print",
+            "subcategorias": [
+                "Impresoras multifunción",
+                "Impresoras láser",
+                "Impresoras de tinta",
+                "Impresoras térmicas",
+                "Plotters",
+                "Consumibles"
+            ]
+        },
+        {
+            "id": 7,
+            "nombre": "Software",
+            "icono": "fa-solid fa-code",
+            "subcategorias": [
+                "Windows",
+                "Microsoft Office",
+                "Antivirus",
+                "Licencias empresariales",
+                "Software de diseño",
+                "Software de desarrollo"
+            ]
+        },
+        {
+            "id": 8,
+            "nombre": "Accesorios",
+            "icono": "fa-solid fa-keyboard",
+            "subcategorias": [
+                "Teclados",
+                "Mouse",
+                "Webcams",
+                "Audífonos",
+                "Parlantes",
+                "Memorias USB",
+                "Adaptadores"
+            ]
+        },
+        {
+            "id": 9,
+            "nombre": "Servicio técnico",
+            "icono": "fa-solid fa-screwdriver-wrench",
+            "subcategorias": [
+                "Mantenimiento de PC",
+                "Reparación de laptops",
+                "Reparación de impresoras",
+                "Instalación de software",
+                "Recuperación de datos",
+                "Diagnóstico técnico"
+            ]
+        }
+    ]
+}
