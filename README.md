@@ -29,12 +29,12 @@ Sigue estos pasos para ejecutar el proyecto de forma local:
 
 1. **Clona este repositorio en tu máquina:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/FransAparicio/ecommerce-bootstrap5.git
    ```
 
 2. **Ingresa a la carpeta del proyecto:**
    ```bash
-   cd tu-repositorio
+   cd ecommerce-BootService
    ```
 
 ## 📄 Licencia
