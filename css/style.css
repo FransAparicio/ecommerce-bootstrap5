@@ -1,7 +1,6 @@
 /* =========================================================
    VARIABLES
 ========================================================= */
-
 :root {
 
     --bs-primary: #0b5d3b;
@@ -84,27 +83,43 @@ img {
 
 .topbar {
 
+    position: relative;
+
+    width: 100%;
+
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+
     background:
         linear-gradient(
             90deg,
-            #063b27,
-            #0b5d3b
+            var(--primary-dark) 0%,
+            var(--primary) 50%,
+            var(--primary-dark) 100%
         );
 
-    color: #ffffff;
+    color: var(--white);
 
     font-size: 13px;
 
-    min-height: 40px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 
-    display: flex;
-
-    align-items: center;
+    z-index: 1040;
 
 }
 
 
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
 .topbar-content {
+
+    width: 100%;
+
+    min-height: 46px;
 
     display: flex;
 
@@ -112,33 +127,299 @@ img {
 
     justify-content: space-between;
 
-    min-height: 40px;
-
-    gap: 20px;
+    gap: 24px;
 
 }
 
 
-.topbar-info,
-.topbar-contact {
+/* =========================================================
+   REDES SOCIALES
+========================================================= */
 
-    display: flex;
+.topbar-redes {
 
-    align-items: center;
-
-    gap: 18px;
-
-}
-
-
-.topbar-info span,
-.topbar-contact a {
+    flex: 0 0 auto;
 
     display: flex;
 
     align-items: center;
 
     gap: 7px;
+
+}
+
+/* =========================================================
+   BOTÓN SOCIAL
+========================================================= */
+.bs-social-link {
+
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    border: 1.5px solid currentColor;
+
+    color: currentColor;
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        background-color .22s ease,
+        color .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease;
+
+}
+
+/* =========================================================
+   ICONO
+========================================================= */
+.bs-social-link i {
+
+    display: block;
+
+    line-height: 1;
+
+    transition:
+        transform .22s ease,
+        color .22s ease;
+
+}
+
+/* =========================================================
+   COLORES DE LAS REDES
+========================================================= */
+.bs-social-facebook {
+    color: #1877F2;
+}
+
+.bs-social-instagram {
+    color: #E4405F;
+}
+
+.bs-social-youtube {
+    color: #FF0000;
+}
+
+.bs-social-tiktok {
+    color: #00F2EA;
+}
+
+/* ==========================================================
+   HOVER REDES SOCIALES
+========================================================== */
+
+.bs-social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
+}
+
+/* FACEBOOK */
+.bs-social-facebook:hover {
+    color: #1877F2;
+    background-color: rgba(24, 119, 242, 0.30);
+    border-color: #1877F2;
+    box-shadow: 0 0 14px rgba(24, 119, 242, 0.45);
+}
+
+/* INSTAGRAM */
+.bs-social-instagram:hover {
+    color: #E4405F;
+    background-color: rgba(228, 64, 95, 0.30);
+    border-color: #E4405F;
+    box-shadow: 0 0 14px rgba(228, 64, 95, 0.45);
+}
+
+/* YOUTUBE */
+.bs-social-youtube:hover {
+    color: #FF3B3B;
+    background-color: rgba(255, 59, 59, 0.30);
+    border-color: #FF3B3B;
+    box-shadow: 0 0 14px rgba(255, 59, 59, 0.45);
+}
+
+/* TIKTOK */
+.bs-social-tiktok:hover {
+    color: #00F2EA;
+    background-color: rgba(0, 242, 234, 0.25);
+    border-color: #00F2EA;
+    box-shadow: 0 0 14px rgba(0, 242, 234, 0.45);
+}
+
+/* ICONO */
+.bs-social-link:hover i {
+    color: currentColor;
+    transform: scale(1.15);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.bs-social-link:focus-visible {
+
+    outline: 2px solid rgba(255,255,255,.8);
+
+    outline-offset: 3px;
+
+}
+
+
+/* =========================================================
+   INFORMACIÓN CENTRAL
+========================================================= */
+
+.topbar-info {
+
+    flex: 1 1 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    min-width: 0;
+
+}
+
+
+/* =========================================================
+   ELEMENTOS DE INFORMACIÓN
+========================================================= */
+
+.topbar-feature {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    color: rgba(255,255,255,.92);
+
+    white-space: nowrap;
+
+    transition:
+        color .2s ease;
+
+}
+
+
+.topbar-feature i {
+
+    color: rgba(255,255,255,.7);
+
+    font-size: 12px;
+
+}
+
+
+.topbar-feature:hover {
+
+    color: #ffffff;
+
+}
+
+/* =========================================================
+   DIVISORES
+========================================================= */
+
+.topbar-divider {
+
+    width: 1px;
+
+    height: 18px;
+
+    flex: 0 0 1px;
+
+    background: rgba(255,255,255,.20);
+
+}
+
+
+/* =========================================================
+   CONTACTO
+========================================================= */
+
+.topbar-contact {
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+
+/* =========================================================
+   LINKS DE CONTACTO
+========================================================= */
+
+.topbar-contact a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: rgba(255,255,255,.95);
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    text-decoration: none;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.topbar-contact a i {
+
+    font-size: 14px;
+
+}
+
+
+/* WhatsApp */
+
+.topbar-contact a:first-child i {
+
+    color: #25D366;
+
+}
+
+
+/* Teléfono */
+
+.topbar-contact a:last-child i {
 
     color: #ffffff;
 
@@ -147,25 +428,9 @@ img {
 
 .topbar-contact a:hover {
 
-    color: #dff7ea;
+    color: #ffffff;
 
-}
-
-
-.topbar-divider {
-
-    width: 1px;
-
-    height: 15px;
-
-    background: rgba(255,255,255,.3);
-
-}
-
-
-.topbar i {
-
-    font-size: 14px;
+    transform: translateY(-1px);
 
 }
 
@@ -1620,7 +1885,7 @@ img {
 
     .topbar-content {
 
-        justify-content: center;
+         justify-content: space-between;
 
     }
 
@@ -1697,28 +1962,67 @@ img {
 
     .topbar {
 
-        min-height: 36px;
+        min-height: 42px;
 
     }
 
 
     .topbar-content {
 
-        min-height: 36px;
+        min-height: 42px;
+
+        gap: 10px;
 
     }
 
+
+    .topbar-redes {
+
+        gap: 5px;
+
+    }
+
+    .bs-social-link {
+
+        width: 28px;
+        height: 28px;
+
+        flex-basis: 28px;
+
+        font-size: 12px;
+
+    }
 
     .topbar-contact {
 
-        gap: 15px;
+        gap: 8px;
 
     }
 
+    .topbar-contact span {
+
+        display: none;
+
+    }
 
     .topbar-contact a {
 
-        font-size: 11px;
+        width: 30px;
+        height: 30px;
+
+        justify-content: center;
+
+    }
+
+    .topbar-contact a i {
+
+        font-size: 15px;
+
+    }
+
+    .topbar-contact .topbar-divider {
+
+        display: none;
 
     }
 
@@ -1899,8 +2203,24 @@ img {
 
 }
 
-
 @media (max-width: 400px) {
+
+    .topbar-redes {
+
+        gap: 3px;
+
+    }
+
+    .bs-social-link {
+
+        width: 26px;
+        height: 26px;
+
+        flex-basis: 26px;
+
+        font-size: 11px;
+
+    }
 
     .logo {
 
