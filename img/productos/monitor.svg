@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Monitor con gráficos de barras">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#e3f4ea"/>
+      <stop offset="1" stop-color="#f4f8f6"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b5d3b"/>
+      <stop offset="1" stop-color="#0f754b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="url(#glow)"/>
+  <circle cx="300" cy="200" r="180" fill="#0b5d3b" opacity="0.06"/>
+
+  <!-- Monitor -->
+  <rect x="165" y="80" width="270" height="175" rx="12" fill="#101817"/>
+  <rect x="177" y="92" width="246" height="151" rx="6" fill="url(#screen)"/>
+
+  <!-- Gráfico de barras -->
+  <g>
+    <rect x="200" y="200" width="20" height="28" rx="3" fill="#83dbaa"/>
+    <rect x="230" y="180" width="20" height="48" rx="3" fill="#83dbaa" opacity="0.85"/>
+    <rect x="260" y="190" width="20" height="38" rx="3" fill="#83dbaa" opacity="0.7"/>
+    <rect x="290" y="160" width="20" height="68" rx="3" fill="#d71920" opacity="0.9"/>
+    <rect x="320" y="175" width="20" height="53" rx="3" fill="#83dbaa" opacity="0.75"/>
+  </g>
+  <line x1="195" y1="235" x2="405" y2="235" stroke="#83dbaa" stroke-width="3" opacity="0.4"/>
+  <circle cx="300" cy="102" r="4" fill="#16221f"/>
+
+  <!-- Base -->
+  <rect x="285" y="255" width="30" height="40" fill="#16221f"/>
+  <rect x="235" y="295" width="130" height="12" rx="6" fill="#16221f"/>
+
+  <circle cx="110" cy="120" r="7" fill="#0b5d3b" opacity="0.2"/>
+  <circle cx="495" cy="330" r="9" fill="#d71920" opacity="0.15"/>
+  <rect x="455" y="120" width="26" height="26" rx="6" fill="#0b5d3b" opacity="0.12" transform="rotate(15 468 133)"/>
+</svg>

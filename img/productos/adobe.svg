@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Pincel creativo de Adobe Creative Cloud">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#e3f4ea"/>
+      <stop offset="1" stop-color="#f4f8f6"/>
+    </radialGradient>
+    <linearGradient id="degradado" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d71920"/>
+      <stop offset="0.5" stop-color="#f2b01e"/>
+      <stop offset="1" stop-color="#0b5d3b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="url(#glow)"/>
+  <circle cx="300" cy="210" r="190" fill="#0b5d3b" opacity="0.06"/>
+
+  <!-- Tarjeta degradada -->
+  <rect x="150" y="90" width="300" height="270" rx="40" fill="url(#degradado)"/>
+
+  <!-- Trazo de pincel -->
+  <path d="M200 300 C 240 200, 320 180, 400 160" stroke="#ffffff" stroke-width="26" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M215 315 C 255 230, 330 210, 395 195" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="405" cy="155" r="14" fill="#ffffff"/>
+
+  <text x="300" y="398" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" fill="#697570" text-anchor="middle" letter-spacing="2">CREATIVE CLOUD</text>
+</svg>

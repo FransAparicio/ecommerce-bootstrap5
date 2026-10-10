@@ -3,7 +3,7 @@
         {
             "id": 1,
             "nombre": "Computadoras",
-            "icono": "fa-solid fa-desktop",
+            "icono": "bi bi-pc-display",
             "subcategorias": [
                 "PC de escritorio",
                 "All in One",
@@ -15,7 +15,7 @@
         {
             "id": 2,
             "nombre": "Laptops",
-            "icono": "fa-solid fa-laptop",
+            "icono": "bi bi-laptop",
             "subcategorias": [
                 "Laptops empresariales",
                 "Laptops gaming",
@@ -27,7 +27,7 @@
         {
             "id": 3,
             "nombre": "Componentes",
-            "icono": "fa-solid fa-microchip",
+            "icono": "bi bi-cpu",
             "subcategorias": [
                 "Procesadores",
                 "Placas madre",
@@ -41,61 +41,49 @@
         },
         {
             "id": 4,
-            "nombre": "Gaming",
-            "icono": "fa-solid fa-gamepad",
+            "nombre": "Monitores",
+            "icono": "bi bi-display",
             "subcategorias": [
-                "PC Gaming",
-                "Monitores Gaming",
-                "Teclados Gaming",
-                "Mouse Gaming",
-                "Audífonos Gaming",
-                "Sillas Gaming"
+                "Monitores gaming",
+                "Monitores LED",
+                "Monitores ultrawide",
+                "Monitores 4K",
+                "Monitores curvos",
+                "Pantallas táctiles"
             ]
         },
         {
             "id": 5,
-            "nombre": "Redes",
-            "icono": "fa-solid fa-network-wired",
+            "nombre": "Gaming",
+            "icono": "bi bi-controller",
             "subcategorias": [
-                "Routers",
-                "Switches",
-                "Access Point",
-                "Tarjetas de red",
-                "Cables de red",
-                "Conectores RJ45",
-                "Racks"
+                "PC Gaming",
+                "Monitores gaming",
+                "Teclados gaming",
+                "Mouse gaming",
+                "Audífonos gaming",
+                "Sillas gaming"
             ]
         },
         {
             "id": 6,
-            "nombre": "Impresoras",
-            "icono": "fa-solid fa-print",
+            "nombre": "Licencias",
+            "icono": "bi bi-key",
             "subcategorias": [
-                "Impresoras multifunción",
-                "Impresoras láser",
-                "Impresoras de tinta",
-                "Impresoras térmicas",
-                "Plotters",
-                "Consumibles"
+                "Windows 11",
+                "Windows 10",
+                "Microsoft Office",
+                "Office 365",
+                "Adobe Creative Cloud",
+                "Autodesk",
+                "Antivirus",
+                "Licencias empresariales"
             ]
         },
         {
             "id": 7,
-            "nombre": "Software",
-            "icono": "fa-solid fa-code",
-            "subcategorias": [
-                "Windows",
-                "Microsoft Office",
-                "Antivirus",
-                "Licencias empresariales",
-                "Software de diseño",
-                "Software de desarrollo"
-            ]
-        },
-        {
-            "id": 8,
             "nombre": "Accesorios",
-            "icono": "fa-solid fa-keyboard",
+            "icono": "bi bi-keyboard",
             "subcategorias": [
                 "Teclados",
                 "Mouse",
@@ -107,9 +95,36 @@
             ]
         },
         {
+            "id": 8,
+            "nombre": "Redes",
+            "icono": "bi bi-diagram-3",
+            "subcategorias": [
+                "Routers",
+                "Switches",
+                "Access Point",
+                "Tarjetas de red",
+                "Cables de red",
+                "Conectores RJ45",
+                "Racks"
+            ]
+        },
+        {
             "id": 9,
+            "nombre": "Impresoras",
+            "icono": "bi bi-printer",
+            "subcategorias": [
+                "Impresoras multifunción",
+                "Impresoras láser",
+                "Impresoras de tinta",
+                "Impresoras térmicas",
+                "Plotters",
+                "Consumibles"
+            ]
+        },
+        {
+            "id": 10,
             "nombre": "Servicio técnico",
-            "icono": "fa-solid fa-screwdriver-wrench",
+            "icono": "bi bi-tools",
             "subcategorias": [
                 "Mantenimiento de PC",
                 "Reparación de laptops",

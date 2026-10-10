@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
 
@@ -7,10 +7,61 @@
 
     <meta
         name="description"
-        content="BootService - Tecnología, computadoras, accesorios, software y servicio técnico."
+        content="BootService Store — Tienda de computación y licencias: computadoras, laptops, componentes, accesorios y software original con activación inmediata."
     >
 
-    <title>BootService Store</title>
+    <meta name="theme-color" content="#0b1512">
+
+    <!-- Open Graph -->
+    <meta
+        property="og:title"
+        content="BootService Store — Computación y Licencias"
+    >
+
+    <meta
+        property="og:description"
+        content="Tecnología, hardware y licencias de software originales."
+    >
+
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:image"
+        content="img/hero/hero-computer.svg"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/logo.png"
+    >
+
+    <!--
+        Tema inicial (evita el parpadeo "FOUC"):
+        respeta la preferencia guardada o del sistema.
+    -->
+    <script>
+        (function () {
+            try {
+                var tema = localStorage.getItem("bootservice_theme");
+
+                if (
+                    !tema &&
+                    window.matchMedia &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches
+                ) {
+                    tema = "dark";
+                }
+
+                document.documentElement.setAttribute(
+                    "data-theme",
+                    tema === "dark" ? "dark" : "light"
+                );
+            } catch (error) {
+                document.documentElement.setAttribute("data-theme", "light");
+            }
+        })();
+    </script>
 
     <!-- Bootstrap 5.3 -->
     <link
@@ -18,16 +69,10 @@
         rel="stylesheet"
     >
 
-    <!-- Bootstrap Icons -->
+    <!-- Bootstrap Icons (única librería de iconos) -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    >
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 
     <!-- CSS propio -->
@@ -36,9 +81,14 @@
 
 <body>
 
+    <!-- Accesibilidad: saltar al contenido -->
+    <a class="skip-link" href="#main">
+        Saltar al contenido
+    </a>
+
 <!-- =========================================================
      TOPBAR
-========================================================= -->
+     ========================================================= -->
 
 <header class="topbar">
 
@@ -53,25 +103,25 @@
             <div class="topbar-redes">
 
                 <a
-                    href="https://www.facebook.com/"
+                    href="https://www.facebook.com/tarijabootservice/"
                     class="bs-social-link bs-social-facebook"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
                     title="Facebook"
                 >
-                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="bi-facebook"></i>
                 </a>
 
                 <a
-                    href="https://www.instagram.com/"
+                    href="https://www.instagram.com/bootservicetarija"
                     class="bs-social-link bs-social-instagram"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
                     title="Instagram"
                 >
-                    <i class="fa-brands fa-instagram"></i>
+                    <i class="bi-instagram"></i>
                 </a>
 
                 <a
@@ -82,7 +132,7 @@
                     aria-label="YouTube"
                     title="YouTube"
                 >
-                    <i class="fa-brands fa-youtube"></i>
+                    <i class="bi-youtube"></i>
                 </a>
 
                 <a
@@ -93,7 +143,7 @@
                     aria-label="TikTok"
                     title="TikTok"
                 >
-                    <i class="fa-brands fa-tiktok"></i>
+                    <i class="bi-tiktok"></i>
                 </a>
 
             </div>
@@ -106,21 +156,21 @@
             <div class="topbar-info">
 
                 <span class="topbar-feature">
-                    <i class="fa-solid fa-truck-fast"></i>
+                    <i class="bi-truck"></i>
                     <span>Envíos a toda Bolivia</span>
                 </span>
 
                 <span class="topbar-divider"></span>
 
                 <span class="topbar-feature">
-                    <i class="fa-solid fa-shield-halved"></i>
+                    <i class="bi-shield-check"></i>
                     <span>Productos con garantía</span>
                 </span>
 
                 <span class="topbar-divider"></span>
 
                 <span class="topbar-feature">
-                    <i class="fa-solid fa-headset"></i>
+                    <i class="bi-headset"></i>
                     <span>Soporte especializado</span>
                 </span>
 
@@ -128,7 +178,7 @@
 
 
             <!-- =================================================
-                 CONTACTO
+                 CONTACTO + TEMA
             ================================================== -->
 
             <div class="topbar-contact">
@@ -140,7 +190,7 @@
                     aria-label="WhatsApp"
                     title="Contactar por WhatsApp"
                 >
-                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="bi-whatsapp"></i>
                     <span>78225111</span>
                 </a>
 
@@ -151,9 +201,22 @@
                     aria-label="Llamar a BootService"
                     title="Llamar"
                 >
-                    <i class="fa-solid fa-phone"></i>
+                    <i class="bi-telephone"></i>
                     <span>76801262</span>
                 </a>
+
+                <span class="topbar-divider"></span>
+
+                <!-- CAMBIAR TEMA: CLARO / OSCURO -->
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Cambiar a tema oscuro"
+                    title="Cambiar a tema oscuro"
+                >
+                    <i class="bi-moon-stars" id="themeIcon"></i>
+                </button>
 
             </div>
 
@@ -165,37 +228,34 @@
 
 <!-- =========================================================
      NAVBAR PRINCIPAL
-========================================================= -->
+     ========================================================= -->
 
 <header class="main-header">
 
     <div class="container-fluid px-3 px-lg-5">
 
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg" aria-label="Principal">
 
             <!-- =================================================
                  LOGO
             ================================================== -->
-
             <a
                 href="#"
                 class="navbar-brand bs-logo-link"
                 aria-label="BootService Store"
+                title="BootService Store"
             >
-
                 <img
                     src="img/logo-horizontal.png"
                     alt="BootService Store"
                     class="logo"
+                    decoding="async"
                 >
-
             </a>
-
 
             <!-- =================================================
                  BOTÓN MOBILE
             ================================================== -->
-
             <button
                 class="navbar-toggler"
                 type="button"
@@ -205,62 +265,126 @@
                 aria-expanded="false"
                 aria-label="Abrir menú"
             >
-
-                <i class="fa-solid fa-bars"></i>
-
+                <i class="bi-list"></i>
             </button>
-
 
             <!-- =================================================
                  CONTENIDO
             ================================================== -->
-
             <div
                 class="collapse navbar-collapse"
                 id="mainNavbar"
             >
-
-
                 <!-- =================================================
-                     BUSCADOR
+                     BUSCADOR (select estilo Select2)
                 ================================================== -->
 
                 <form
                     class="search-wrapper"
                     id="searchForm"
+                    role="search"
                 >
 
                     <div class="search-box">
 
 
-                        <!-- SELECT CATEGORÍAS -->
+                        <!-- SELECT DE CATEGORÍAS -->
 
                         <div class="search-category">
 
-                            <i class="fa-solid fa-layer-group"></i>
-
-                            <select
-                                id="searchCategory"
-                                aria-label="Seleccionar categoría"
+                            <div
+                                class="dropdown category-select"
                             >
 
-                                <option value="">
-                                    Todas
-                                </option>
+                                <button
+                                    type="button"
+                                    class="category-select-btn"
+                                    id="categorySelectBtn"
+                                    data-bs-toggle="dropdown"
+                                    data-bs-auto-close="outside"
+                                    aria-expanded="false"
+                                    aria-haspopup="true"
+                                >
+                                    <span class="category-select-icon">
+                                        <i class="bi-grid-1x2" id="categorySelectIcon"></i>
+                                    </span>
 
-                            </select>
+                                    <span
+                                        class="category-select-label"
+                                        id="categorySelectLabel"
+                                    >
+                                        Todas
+                                    </span>
+
+                                    <i class="bi-chevron-down category-select-caret"></i>
+                                </button>
+
+                                <div
+                                    class="dropdown-menu category-dropdown-menu"
+                                    id="categoryDropdownMenu"
+                                >
+
+                                    <div class="category-dropdown-search">
+                                        <i class="bi-search"></i>
+
+                                        <input
+                                            type="text"
+                                            id="categoryFilterInput"
+                                            placeholder="Filtrar categoría…"
+                                            aria-label="Filtrar categoría"
+                                            autocomplete="off"
+                                        >
+                                    </div>
+
+                                    <div
+                                        class="category-dropdown-list"
+                                        id="categoryList"
+                                        role="listbox"
+                                        aria-label="Categorías"
+                                    >
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
 
-                        <!-- INPUT -->
+                        <!-- INPUT (etiqueta flotante Material) -->
+
+                        <div class="search-field">
+
+                            <input
+                                type="search"
+                                id="searchInput"
+                                placeholder=" "
+                                autocomplete="off"
+                                aria-label="Buscar productos"
+                            >
+
+                            <label
+                                class="search-label"
+                                for="searchInput"
+                            >
+                                ¿Qué estás buscando?
+                            </label>
+
+                        </div>
+
+                        <kbd
+                            class="search-kbd"
+                            aria-hidden="true"
+                            title="Presiona / para buscar"
+                        >/</kbd>
+
+                        <!-- CAMPO OCULTO: categoría seleccionada -->
 
                         <input
-                            type="search"
-                            id="searchInput"
-                            placeholder="¿Qué estás buscando?"
-                            autocomplete="off"
-                            aria-label="Buscar productos"
+                            type="hidden"
+                            id="searchCategory"
+                            name="categoria"
+                            value=""
                         >
 
 
@@ -272,7 +396,7 @@
                             aria-label="Buscar"
                         >
 
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="bi-search"></i>
 
                         </button>
 
@@ -297,7 +421,7 @@
 
                         <div class="nav-action-icon">
 
-                            <i class="fa-regular fa-user"></i>
+                            <i class="bi-person"></i>
 
                         </div>
 
@@ -319,17 +443,23 @@
                     <!-- CARRITO -->
 
                     <a
-                        href="#"
+                        href="#cartOffcanvas"
                         class="nav-action cart-action"
+                        role="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#cartOffcanvas"
+                        aria-controls="cartOffcanvas"
+                        aria-label="Abrir carrito"
                     >
 
                         <div class="nav-action-icon cart-icon">
 
-                            <i class="fa-solid fa-cart-shopping"></i>
+                            <i class="bi-cart"></i>
 
                             <span
-                                class="cart-count"
+                                class="cart-count d-none"
                                 id="cartCount"
+                                aria-hidden="true"
                             >
                                 0
                             </span>
@@ -363,13 +493,13 @@
 
 <!-- =========================================================
      MENÚ DE CATEGORÍAS
-========================================================= -->
+     ========================================================= -->
 
-<section class="category-menu">
+<section class="category-menu" aria-label="Categorías">
 
     <div class="container-fluid px-3 px-lg-5">
 
-        <nav class="category-nav">
+        <nav class="category-nav" aria-label="Menú de categorías">
 
 
             <!-- TODAS LAS CATEGORÍAS -->
@@ -381,18 +511,18 @@
                     class="category-main-button"
                     id="categoryMainButton"
                     aria-expanded="false"
+                    aria-controls="megaMenu"
                 >
 
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="bi-list"></i>
 
                     <span>
                         Todas las categorías
                     </span>
 
-                    <i class="fa-solid fa-chevron-down category-arrow"></i>
+                    <i class="bi-chevron-down category-arrow"></i>
 
                 </button>
-
 
                 <!-- =================================================
                      MEGA MENU
@@ -412,28 +542,56 @@
                             class="mega-categories"
                             id="megaCategories"
                         >
+                            <span class="mega-categories-title">
+                                Categorías
+                            </span>
                         </div>
 
 
-                        <!-- SUBCATEGORÍAS -->
+                        <!-- SUBCATEGORÍAS + PROMO -->
 
-                        <div
-                            class="mega-subcategories"
-                            id="megaSubcategories"
-                        >
+                        <div class="mega-main">
 
-                            <div class="mega-placeholder">
+                            <div
+                                class="mega-subcategories"
+                                id="megaSubcategories"
+                            >
 
-                                <i class="fa-solid fa-layer-group"></i>
+                                <div class="mega-placeholder">
 
-                                <h5>
-                                    Explora nuestras categorías
-                                </h5>
+                                    <i class="bi-grid-1x2"></i>
 
-                                <p>
-                                    Selecciona una categoría para
-                                    ver sus productos.
-                                </p>
+                                    <h5>
+                                        Explora nuestras categorías
+                                    </h5>
+
+                                    <p>
+                                        Selecciona una categoría para
+                                        ver sus productos.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PROMO DEL MEGA MENÚ -->
+
+                            <div class="mega-promo">
+
+                                <div class="mega-promo-icon">
+                                    <i class="bi-key"></i>
+                                </div>
+
+                                <div class="mega-promo-content">
+                                    <strong>Licencias con 20% OFF</strong>
+                                    <span>Windows, Office y Adobe originales.</span>
+                                </div>
+
+                                <a href="#productos" class="btn-mega-promo">
+                                    Ver ofertas
+                                    <i class="bi-arrow-right"></i>
+                                </a>
 
                             </div>
 
@@ -461,74 +619,268 @@
 
 </section>
 
+<!-- Contenido principal -->
+
+<main id="main">
+
 <!-- =========================================================
-     HERO
-========================================================= -->
+     HERO — CARRUSEL (SETUP / LICENCIAS / SERVICIO)
+     ========================================================= -->
 
 <section class="hero-section">
 
     <div class="container">
 
-        <div class="row align-items-center">
+        <div
+            class="hero-carousel carousel slide"
+            id="heroCarousel"
+            data-bs-ride="carousel"
+            data-bs-interval="6000"
+        >
 
-            <!-- TEXTO -->
+            <!-- INDICADORES -->
 
-            <div class="col-lg-6">
+            <div class="carousel-indicators">
 
-                <span class="hero-label">
-                    TECNOLOGÍA PARA EL FUTURO
-                </span>
+                <button
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Setup de computación"
+                ></button>
 
-                <h1>
-                    Tecnología que
-                    <span>impulsa tus ideas.</span>
-                </h1>
+                <button
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="1"
+                    aria-label="Licencias de software"
+                ></button>
 
-                <p>
-                    Computadoras, laptops, componentes, software
-                    y soluciones informáticas para profesionales,
-                    empresas y gamers.
-                </p>
+                <button
+                    type="button"
+                    data-bs-target="#heroCarousel"
+                    data-bs-slide-to="2"
+                    aria-label="Servicio técnico"
+                ></button>
+
+            </div>
 
 
-                <div class="hero-buttons">
+            <!-- SLIDES -->
 
-                    <a href="#" class="btn btn-primary-custom">
+            <div class="carousel-inner">
 
-                        Comprar ahora
 
-                        <i class="bi bi-arrow-right"></i>
+                <!-- SLIDE 1: SETUP -->
 
-                    </a>
+                <div class="carousel-item active">
 
-                    <a href="#" class="btn btn-outline-custom">
+                    <div class="row align-items-center g-4">
 
-                        Ver categorías
+                        <div class="col-lg-6 hero-slide-content">
 
-                    </a>
+                            <span class="hero-label">
+                                COMPUTACIÓN Y LICENCIAS
+                            </span>
+
+                            <h1>
+                                Tecnología que
+                                <span>impulsa tus ideas.</span>
+                            </h1>
+
+                            <p>
+                                Computadoras, laptops, componentes y
+                                accesorios de las mejores marcas para
+                                tu setup.
+                            </p>
+
+                            <div class="hero-buttons">
+
+                                <a href="#productos" class="btn btn-primary-custom">
+                                    Comprar ahora
+                                    <i class="bi-arrow-right"></i>
+                                </a>
+
+                                <a href="#categorias" class="btn btn-outline-custom">
+                                    Ver categorías
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-6 hero-slide-media">
+
+                            <div class="hero-glow" aria-hidden="true"></div>
+
+                            <img
+                                src="img/hero/hero-computer.svg"
+                                alt="Setup de computadora con licencia de software"
+                                class="img-fluid"
+                                width="600"
+                                height="450"
+                                fetchpriority="high"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SLIDE 2: LICENCIAS -->
+
+                <div class="carousel-item">
+
+                    <div class="row align-items-center g-4">
+
+                        <div class="col-lg-6 hero-slide-content">
+
+                            <span class="hero-label hero-label-red">
+                                SOFTWARE ORIGINAL
+                            </span>
+
+                            <h1>
+                                Licencias con
+                                <span>activación inmediata.</span>
+                            </h1>
+
+                            <p>
+                                Windows, Microsoft Office, Adobe,
+                                Autodesk y antivirus. Digitales,
+                                originales y con garantía.
+                            </p>
+
+                            <div class="hero-buttons">
+
+                                <a href="#productos" class="btn btn-primary-custom">
+                                    Ver licencias
+                                    <i class="bi-arrow-right"></i>
+                                </a>
+
+                                <a href="#productos" class="btn btn-outline-custom">
+                                    Cómo comprar
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-6 hero-slide-media">
+
+                            <div class="hero-glow" aria-hidden="true"></div>
+
+                            <img
+                                src="img/hero/hero-licenses.svg"
+                                alt="Licencias de software originales con activación inmediata"
+                                class="img-fluid"
+                                width="600"
+                                height="450"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SLIDE 3: SERVICIO -->
+
+                <div class="carousel-item">
+
+                    <div class="row align-items-center g-4">
+
+                        <div class="col-lg-6 hero-slide-content">
+
+                            <span class="hero-label">
+                                SOPORTE TÉCNICO
+                            </span>
+
+                            <h1>
+                                Servicio técnico
+                                <span>especializado.</span>
+                            </h1>
+
+                            <p>
+                                Reparamos, mantenemos e instalamos
+                                todo tu equipo. Diagnóstico gratuito
+                                en Tarija.
+                            </p>
+
+                            <div class="hero-buttons">
+
+                                <a href="#" class="btn btn-primary-custom">
+                                    Conocer servicio
+                                    <i class="bi-arrow-right"></i>
+                                </a>
+
+                                <a
+                                    href="https://wa.me/59178225111"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="btn btn-outline-custom"
+                                >
+                                    <i class="bi-whatsapp"></i>
+                                    Contactar
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-6 hero-slide-media">
+
+                            <div class="hero-glow" aria-hidden="true"></div>
+
+                            <img
+                                src="img/hero/hero-service.svg"
+                                alt="Servicio técnico especializado en computadoras"
+                                class="img-fluid"
+                                width="600"
+                                height="450"
+                                loading="lazy"
+                                decoding="async"
+                            >
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- IMAGEN -->
+            <!-- CONTROLES -->
 
-            <div class="col-lg-6">
+            <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="prev"
+            >
+                <i class="bi-chevron-left"></i>
+                <span class="visually-hidden">Anterior</span>
+            </button>
 
-                <div class="hero-image">
-
-                    <div class="hero-glow"></div>
-
-                    <img
-                        src="assets/img/hero/hero-computer.png"
-                        alt="Computadora tecnológica"
-                        class="img-fluid"
-                    >
-
-                </div>
-
-            </div>
+            <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide="next"
+            >
+                <i class="bi-chevron-right"></i>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
 
         </div>
 
@@ -539,9 +891,9 @@
 
 <!-- =========================================================
      CATEGORÍAS
-========================================================= -->
+     ========================================================= -->
 
-<section class="section-padding">
+<section class="section-padding" id="categorias">
 
     <div class="container">
 
@@ -559,9 +911,9 @@
 
             </div>
 
-            <a href="#" class="view-all">
+            <a href="#productos" class="view-all">
                 Ver todas
-                <i class="bi bi-arrow-right"></i>
+                <i class="bi-arrow-right"></i>
             </a>
 
         </div>
@@ -577,7 +929,7 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-pc-display"></i>
+                        <i class="bi-pc-display"></i>
 
                     </div>
 
@@ -587,7 +939,7 @@
 
                     <span>
                         Ver productos
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -601,7 +953,7 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-laptop"></i>
+                        <i class="bi-laptop"></i>
 
                     </div>
 
@@ -611,7 +963,7 @@
 
                     <span>
                         Ver productos
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -625,7 +977,7 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-cpu"></i>
+                        <i class="bi-cpu"></i>
 
                     </div>
 
@@ -635,7 +987,7 @@
 
                     <span>
                         Ver productos
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -649,7 +1001,31 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-controller"></i>
+                        <i class="bi-display"></i>
+
+                    </div>
+
+                    <h3>
+                        Monitores
+                    </h3>
+
+                    <span>
+                        Ver productos
+                        <i class="bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a href="#" class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="bi-controller"></i>
 
                     </div>
 
@@ -659,7 +1035,7 @@
 
                     <span>
                         Ver productos
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -673,55 +1049,7 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-printer"></i>
-
-                    </div>
-
-                    <h3>
-                        Impresoras
-                    </h3>
-
-                    <span>
-                        Ver productos
-                        <i class="bi bi-arrow-right"></i>
-                    </span>
-
-                </a>
-
-            </div>
-
-
-            <div class="col-6 col-md-4 col-lg-3">
-
-                <a href="#" class="category-card">
-
-                    <div class="category-icon">
-
-                        <i class="bi bi-key"></i>
-
-                    </div>
-
-                    <h3>
-                        Software
-                    </h3>
-
-                    <span>
-                        Ver productos
-                        <i class="bi bi-arrow-right"></i>
-                    </span>
-
-                </a>
-
-            </div>
-
-
-            <div class="col-6 col-md-4 col-lg-3">
-
-                <a href="#" class="category-card">
-
-                    <div class="category-icon">
-
-                        <i class="bi bi-mouse"></i>
+                        <i class="bi-keyboard"></i>
 
                     </div>
 
@@ -731,7 +1059,7 @@
 
                     <span>
                         Ver productos
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -745,7 +1073,31 @@
 
                     <div class="category-icon">
 
-                        <i class="bi bi-tools"></i>
+                        <i class="bi-key"></i>
+
+                    </div>
+
+                    <h3>
+                        Licencias
+                    </h3>
+
+                    <span>
+                        Ver licencias
+                        <i class="bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </div>
+
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <a href="#" class="category-card">
+
+                    <div class="category-icon">
+
+                        <i class="bi-tools"></i>
 
                     </div>
 
@@ -755,7 +1107,7 @@
 
                     <span>
                         Conocer servicio
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </span>
 
                 </a>
@@ -771,9 +1123,9 @@
 
 <!-- =========================================================
      PRODUCTOS DESTACADOS
-========================================================= -->
+     ========================================================= -->
 
-<section class="products-section">
+<section class="products-section" id="productos">
 
     <div class="container">
 
@@ -793,7 +1145,7 @@
 
             <a href="#" class="view-all">
                 Ver catálogo
-                <i class="bi bi-arrow-right"></i>
+                <i class="bi-arrow-right"></i>
             </a>
 
         </div>
@@ -813,15 +1165,22 @@
                             Nuevo
                         </span>
 
-                        <button class="favorite-btn">
-
-                            <i class="bi bi-heart"></i>
-
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Laptop ASUS Gaming a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
                         </button>
 
                         <img
-                            src="assets/img/productos/laptop.jpg"
-                            alt="Laptop"
+                            src="img/productos/laptop.svg"
+                            alt="Laptop ASUS Gaming de 15 pulgadas"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
                         >
 
                     </div>
@@ -837,13 +1196,16 @@
                             Laptop ASUS Gaming
                         </h3>
 
-                        <div class="product-rating">
-
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 12 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
 
                             <span>
                                 (12)
@@ -859,9 +1221,13 @@
 
                             <button
                                 class="add-cart"
+                                type="button"
                                 data-product="Laptop ASUS Gaming"
+                                data-price="8499"
+                                data-image="img/productos/laptop.svg"
+                                aria-label="Agregar al carrito: Laptop ASUS Gaming"
                             >
-                                <i class="bi bi-cart-plus"></i>
+                                <i class="bi-cart-plus"></i>
                             </button>
 
                         </div>
@@ -885,15 +1251,22 @@
                             Oferta
                         </span>
 
-                        <button class="favorite-btn">
-
-                            <i class="bi bi-heart"></i>
-
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Monitor Gaming 27 a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
                         </button>
 
                         <img
-                            src="assets/img/productos/monitor.jpg"
-                            alt="Monitor"
+                            src="img/productos/monitor.svg"
+                            alt="Monitor gaming de 27 pulgadas"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
                         >
 
                     </div>
@@ -909,13 +1282,16 @@
                             Monitor Gaming 27"
                         </h3>
 
-                        <div class="product-rating">
-
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star"></i>
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 4 de 5 estrellas, 8 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star"></i>
 
                             <span>
                                 (8)
@@ -931,9 +1307,13 @@
 
                             <button
                                 class="add-cart"
+                                type="button"
                                 data-product="Monitor Gaming 27"
+                                data-price="2899"
+                                data-image="img/productos/monitor.svg"
+                                aria-label="Agregar al carrito: Monitor Gaming 27"
                             >
-                                <i class="bi bi-cart-plus"></i>
+                                <i class="bi-cart-plus"></i>
                             </button>
 
                         </div>
@@ -953,15 +1333,22 @@
 
                     <div class="product-image">
 
-                        <button class="favorite-btn">
-
-                            <i class="bi bi-heart"></i>
-
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Teclado Mecánico RGB a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
                         </button>
 
                         <img
-                            src="assets/img/productos/keyboard.jpg"
-                            alt="Teclado"
+                            src="img/productos/teclado.svg"
+                            alt="Teclado mecánico RGB retroiluminado"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
                         >
 
                     </div>
@@ -977,13 +1364,16 @@
                             Teclado Mecánico RGB
                         </h3>
 
-                        <div class="product-rating">
-
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 24 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
 
                             <span>
                                 (24)
@@ -999,9 +1389,13 @@
 
                             <button
                                 class="add-cart"
+                                type="button"
                                 data-product="Teclado Mecánico RGB"
+                                data-price="459"
+                                data-image="img/productos/teclado.svg"
+                                aria-label="Agregar al carrito: Teclado Mecánico RGB"
                             >
-                                <i class="bi bi-cart-plus"></i>
+                                <i class="bi-cart-plus"></i>
                             </button>
 
                         </div>
@@ -1025,15 +1419,22 @@
                             Popular
                         </span>
 
-                        <button class="favorite-btn">
-
-                            <i class="bi bi-heart"></i>
-
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar SSD NVMe 1TB a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
                         </button>
 
                         <img
-                            src="assets/img/productos/ssd.jpg"
-                            alt="SSD"
+                            src="img/productos/ssd.svg"
+                            alt="Disco sólido SSD NVMe de 1TB"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
                         >
 
                     </div>
@@ -1049,13 +1450,16 @@
                             SSD NVMe 1TB
                         </h3>
 
-                        <div class="product-rating">
-
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 31 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
 
                             <span>
                                 (31)
@@ -1071,9 +1475,349 @@
 
                             <button
                                 class="add-cart"
+                                type="button"
                                 data-product="SSD NVMe 1TB"
+                                data-price="699"
+                                data-image="img/productos/ssd.svg"
+                                aria-label="Agregar al carrito: SSD NVMe 1TB"
                             >
-                                <i class="bi bi-cart-plus"></i>
+                                <i class="bi-cart-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PRODUCTO 5: LICENCIA -->
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <span class="product-badge">
+                            Digital
+                        </span>
+
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Windows 11 Pro a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
+                        </button>
+
+                        <img
+                            src="img/productos/windows.svg"
+                            alt="Licencia digital de Windows 11 Pro"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            Licencias
+                        </span>
+
+                        <h3>
+                            Windows 11 Pro
+                        </h3>
+
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 58 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+
+                            <span>
+                                (58)
+                            </span>
+
+                        </div>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                Bs. 450
+                            </strong>
+
+                            <button
+                                class="add-cart"
+                                type="button"
+                                data-product="Windows 11 Pro"
+                                data-price="450"
+                                data-image="img/productos/windows.svg"
+                                aria-label="Agregar al carrito: Windows 11 Pro"
+                            >
+                                <i class="bi-cart-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PRODUCTO 6: LICENCIA -->
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Microsoft Office 2024 a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
+                        </button>
+
+                        <img
+                            src="img/productos/office.svg"
+                            alt="Licencia de Microsoft Office 2024"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            Licencias
+                        </span>
+
+                        <h3>
+                            Microsoft Office 2024
+                        </h3>
+
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 43 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+
+                            <span>
+                                (43)
+                            </span>
+
+                        </div>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                Bs. 520
+                            </strong>
+
+                            <button
+                                class="add-cart"
+                                type="button"
+                                data-product="Microsoft Office 2024"
+                                data-price="520"
+                                data-image="img/productos/office.svg"
+                                aria-label="Agregar al carrito: Microsoft Office 2024"
+                            >
+                                <i class="bi-cart-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PRODUCTO 7: LICENCIA -->
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <span class="product-badge sale">
+                            Oferta
+                        </span>
+
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Antivirus Total Security a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
+                        </button>
+
+                        <img
+                            src="img/productos/antivirus.svg"
+                            alt="Licencia de antivirus con protección total"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            Licencias
+                        </span>
+
+                        <h3>
+                            Antivirus Total Security
+                        </h3>
+
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 4 de 5 estrellas, 26 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star"></i>
+
+                            <span>
+                                (26)
+                            </span>
+
+                        </div>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                Bs. 189
+                            </strong>
+
+                            <button
+                                class="add-cart"
+                                type="button"
+                                data-product="Antivirus Total Security"
+                                data-price="189"
+                                data-image="img/productos/antivirus.svg"
+                                aria-label="Agregar al carrito: Antivirus Total Security"
+                            >
+                                <i class="bi-cart-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PRODUCTO 8: LICENCIA -->
+
+            <div class="col-6 col-md-4 col-lg-3">
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <button
+                            class="favorite-btn"
+                            type="button"
+                            aria-label="Agregar Adobe Creative Cloud a favoritos"
+                            aria-pressed="false"
+                        >
+                            <i class="bi-heart"></i>
+                        </button>
+
+                        <img
+                            src="img/productos/adobe.svg"
+                            alt="Licencia de Adobe Creative Cloud"
+                            width="600"
+                            height="450"
+                            loading="lazy"
+                            decoding="async"
+                        >
+
+                    </div>
+
+
+                    <div class="product-content">
+
+                        <span class="product-category">
+                            Licencias
+                        </span>
+
+                        <h3>
+                            Adobe Creative Cloud
+                        </h3>
+
+                        <div
+                            class="product-rating"
+                            role="img"
+                            aria-label="Calificación: 5 de 5 estrellas, 19 reseñas"
+                        >
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+                            <i class="bi-star-fill"></i>
+
+                            <span>
+                                (19)
+                            </span>
+
+                        </div>
+
+                        <div class="product-bottom">
+
+                            <strong>
+                                Bs. 890
+                            </strong>
+
+                            <button
+                                class="add-cart"
+                                type="button"
+                                data-product="Adobe Creative Cloud"
+                                data-price="890"
+                                data-image="img/productos/adobe.svg"
+                                aria-label="Agregar al carrito: Adobe Creative Cloud"
+                            >
+                                <i class="bi-cart-plus"></i>
                             </button>
 
                         </div>
@@ -1093,9 +1837,9 @@
 
 <!-- =========================================================
      BANNER PROMOCIONAL
-========================================================= -->
+     ========================================================= -->
 
-<section class="promo-section">
+<section class="promo-section" aria-label="Promoción de licencias">
 
     <div class="container">
 
@@ -1113,25 +1857,26 @@
                 </h2>
 
                 <p>
-                    Windows, Microsoft Office, Autodesk,
-                    Adobe y mucho más.
+                    Windows, Microsoft Office, Adobe, Autodesk y mucho
+                    más. Activación inmediata por correo y garantía de
+                    autenticidad.
                 </p>
 
-                <a href="#" class="btn btn-light">
+                <a href="#productos" class="btn btn-light">
                     Ver licencias
-                    <i class="bi bi-arrow-right"></i>
+                    <i class="bi-arrow-right"></i>
                 </a>
 
             </div>
 
 
-            <div class="promo-decoration">
+            <div class="promo-decoration" aria-hidden="true">
 
-                <i class="bi bi-windows"></i>
+                <i class="bi-windows"></i>
 
-                <i class="bi bi-file-earmark-code"></i>
+                <i class="bi-file-earmark-code"></i>
 
-                <i class="bi bi-brush"></i>
+                <i class="bi-brush"></i>
 
             </div>
 
@@ -1144,7 +1889,7 @@
 
 <!-- =========================================================
      SERVICIOS
-========================================================= -->
+     ========================================================= -->
 
 <section class="section-padding">
 
@@ -1175,7 +1920,7 @@
 
                     <div class="service-icon">
 
-                        <i class="bi bi-pc-display-horizontal"></i>
+                        <i class="bi-pc-display-horizontal"></i>
 
                     </div>
 
@@ -1190,7 +1935,7 @@
 
                     <a href="#">
                         Más información
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </a>
 
                 </div>
@@ -1204,7 +1949,7 @@
 
                     <div class="service-icon">
 
-                        <i class="bi bi-laptop"></i>
+                        <i class="bi-laptop"></i>
 
                     </div>
 
@@ -1219,7 +1964,7 @@
 
                     <a href="#">
                         Más información
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </a>
 
                 </div>
@@ -1233,7 +1978,7 @@
 
                     <div class="service-icon">
 
-                        <i class="bi bi-printer"></i>
+                        <i class="bi-printer"></i>
 
                     </div>
 
@@ -1248,7 +1993,7 @@
 
                     <a href="#">
                         Más información
-                        <i class="bi bi-arrow-right"></i>
+                        <i class="bi-arrow-right"></i>
                     </a>
 
                 </div>
@@ -1264,9 +2009,9 @@
 
 <!-- =========================================================
      BENEFICIOS
-========================================================= -->
+     ========================================================= -->
 
-<section class="benefits-section">
+<section class="benefits-section" aria-label="Beneficios">
 
     <div class="container">
 
@@ -1276,7 +2021,7 @@
 
                 <div class="benefit">
 
-                    <i class="bi bi-truck"></i>
+                    <i class="bi-truck"></i>
 
                     <div>
 
@@ -1299,7 +2044,7 @@
 
                 <div class="benefit">
 
-                    <i class="bi bi-shield-check"></i>
+                    <i class="bi-shield-check"></i>
 
                     <div>
 
@@ -1322,7 +2067,7 @@
 
                 <div class="benefit">
 
-                    <i class="bi bi-credit-card"></i>
+                    <i class="bi-credit-card"></i>
 
                     <div>
 
@@ -1345,16 +2090,16 @@
 
                 <div class="benefit">
 
-                    <i class="bi bi-headset"></i>
+                    <i class="bi-lightning-charge"></i>
 
                     <div>
 
                         <strong>
-                            Soporte
+                            Entrega digital
                         </strong>
 
                         <span>
-                            Atención especializada
+                            Licencias al instante
                         </span>
 
                     </div>
@@ -1369,10 +2114,12 @@
 
 </section>
 
+</main>
+
 
 <!-- =========================================================
      FOOTER
-========================================================= -->
+     ========================================================= -->
 
 <footer class="footer">
 
@@ -1385,9 +2132,10 @@
             <div class="col-lg-4">
 
                 <img
-                    src="assets/img/logo-horizontal.png"
-                    alt="BootService"
+                    src="img/logo-horizontal.png"
+                    alt="BootService Store"
                     class="footer-logo"
+                    decoding="async"
                 >
 
                 <p>
@@ -1398,20 +2146,40 @@
 
                 <div class="social-links">
 
-                    <a href="#">
-                        <i class="bi bi-facebook"></i>
+                    <a
+                        href="https://www.facebook.com/tarijabootservice/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                    >
+                        <i class="bi-facebook"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="bi bi-instagram"></i>
+                    <a
+                        href="https://www.instagram.com/bootservicetarija"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <i class="bi-instagram"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="bi bi-tiktok"></i>
+                    <a
+                        href="https://www.tiktok.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TikTok"
+                    >
+                        <i class="bi-tiktok"></i>
                     </a>
 
-                    <a href="#">
-                        <i class="bi bi-whatsapp"></i>
+                    <a
+                        href="https://wa.me/59178225111"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                    >
+                        <i class="bi-whatsapp"></i>
                     </a>
 
                 </div>
@@ -1430,23 +2198,35 @@
                 <ul>
 
                     <li>
-                        <a href="#">Computadoras</a>
+                        <a href="#categorias">Computadoras</a>
                     </li>
 
                     <li>
-                        <a href="#">Laptops</a>
+                        <a href="#categorias">Laptops</a>
                     </li>
 
                     <li>
-                        <a href="#">Componentes</a>
+                        <a href="#categorias">Componentes</a>
                     </li>
 
                     <li>
-                        <a href="#">Gaming</a>
+                        <a href="#categorias">Monitores</a>
                     </li>
 
                     <li>
-                        <a href="#">Accesorios</a>
+                        <a href="#categorias">Gaming</a>
+                    </li>
+
+                    <li>
+                        <a href="#categorias">Accesorios</a>
+                    </li>
+
+                    <li>
+                        <a href="#categorias">Licencias</a>
+                    </li>
+
+                    <li>
+                        <a href="#categorias">Servicio técnico</a>
                     </li>
 
                 </ul>
@@ -1501,7 +2281,7 @@
 
                     <li>
 
-                        <i class="bi bi-geo-alt"></i>
+                        <i class="bi-geo-alt"></i>
 
                         Tarija, Bolivia
 
@@ -1509,7 +2289,7 @@
 
                     <li>
 
-                        <i class="bi bi-whatsapp"></i>
+                        <i class="bi-whatsapp"></i>
 
                         78225111
 
@@ -1517,7 +2297,7 @@
 
                     <li>
 
-                        <i class="bi bi-telephone"></i>
+                        <i class="bi-telephone"></i>
 
                         76801262
 
@@ -1525,7 +2305,7 @@
 
                     <li>
 
-                        <i class="bi bi-envelope"></i>
+                        <i class="bi-envelope"></i>
 
                         contacto@bootservice.com
 
@@ -1549,7 +2329,7 @@
             </span>
 
             <span>
-                Tecnología para el futuro.
+                Computación y licencias.
             </span>
 
         </div>
@@ -1560,45 +2340,108 @@
 
 
 <!-- =========================================================
-     TOAST CARRITO
-========================================================= -->
+     CARRITO (DRAWER)
+     ========================================================= -->
 
 <div
-    class="toast-container position-fixed bottom-0 end-0 p-3"
-    id="toastContainer"
+    class="offcanvas offcanvas-end cart-drawer"
+    tabindex="-1"
+    id="cartOffcanvas"
+    aria-labelledby="cartOffcanvasLabel"
 >
 
-    <div
-        id="cartToast"
-        class="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-    >
+    <div class="offcanvas-header">
 
-        <div class="toast-header">
+        <h5 class="offcanvas-title" id="cartOffcanvasLabel">
+            <i class="bi-cart"></i>
+            Mi carrito
+            <span class="cart-badge" id="cartBadge">0</span>
+        </h5>
 
-            <i class="bi bi-cart-check text-success me-2"></i>
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Cerrar carrito"
+        ></button>
 
-            <strong class="me-auto">
-                BootService
-            </strong>
+    </div>
 
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="toast"
-            ></button>
+    <div class="offcanvas-body">
 
-        </div>
+        <div class="cart-items" id="cartItems"></div>
 
-        <div class="toast-body">
-            Producto agregado al carrito.
+        <div class="cart-empty" id="cartEmpty">
+
+            <i class="bi-cart-x"></i>
+
+            <h6>
+                Tu carrito está vacío
+            </h6>
+
+            <p>
+                Agrega productos o licencias para comenzar.
+            </p>
+
+            <a
+                href="#productos"
+                class="btn btn-primary-custom"
+                data-bs-dismiss="offcanvas"
+            >
+                Ir al catálogo
+                <i class="bi-arrow-right"></i>
+            </a>
+
         </div>
 
     </div>
 
+    <div class="cart-footer">
+
+        <div class="cart-subtotal">
+            <span>Subtotal</span>
+            <strong id="cartSubtotal">Bs. 0</strong>
+        </div>
+
+        <p class="cart-note">
+            <i class="bi-truck"></i>
+            Envíos a toda Bolivia. Las licencias llegan al instante
+            por correo.
+        </p>
+
+        <button
+            type="button"
+            class="btn-checkout"
+            id="checkoutBtn"
+            disabled
+        >
+            Finalizar compra
+            <i class="bi-lock"></i>
+        </button>
+
+        <button
+            type="button"
+            class="btn-clean"
+            id="clearCartBtn"
+        >
+            Vaciar carrito
+        </button>
+
+    </div>
+
 </div>
+
+
+<!-- =========================================================
+     TOASTER 2.0 (NOTIFICACIONES)
+     ========================================================= -->
+
+<div
+    class="toaster"
+    id="toaster"
+    aria-live="polite"
+    aria-atomic="false"
+></div>
 
 
 <!-- Bootstrap JS -->
@@ -1610,6 +2453,7 @@
 
 <!-- JavaScript propio -->
 
+<script src="js/toaster.js"></script>
 <script src="js/app.js"></script>
 <script src="js/navbar.js"></script>
 

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Paquete de Microsoft Office 2024">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#e3f4ea"/>
+      <stop offset="1" stop-color="#f4f8f6"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="url(#glow)"/>
+  <circle cx="300" cy="220" r="190" fill="#0b5d3b" opacity="0.06"/>
+
+  <g transform="rotate(-3 300 220)">
+    <!-- Sombra -->
+    <rect x="178" y="90" width="260" height="300" rx="16" fill="#063b27" opacity="0.15"/>
+    <!-- Documento -->
+    <rect x="170" y="80" width="260" height="300" rx="16" fill="#ffffff"/>
+    <path d="M170 96 a16 16 0 0 1 16 -16 h228 a16 16 0 0 1 16 16 v40 h-260 z" fill="#0b5d3b"/>
+    <text x="195" y="109" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="800" fill="#ffffff" letter-spacing="1.5">MICROSOFT OFFICE 2024</text>
+
+    <!-- Líneas del documento -->
+    <g fill="#dcebe2">
+      <rect x="195" y="150" width="210" height="14" rx="7"/>
+      <rect x="195" y="176" width="210" height="14" rx="7"/>
+      <rect x="195" y="202" width="150" height="14" rx="7"/>
+    </g>
+
+    <!-- Chips de la suite -->
+    <g transform="translate(195 240)">
+      <rect width="64" height="64" rx="12" fill="#0b5d3b"/>
+      <text x="32" y="41" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="middle">W</text>
+      <rect x="76" width="64" height="64" rx="12" fill="#d71920"/>
+      <text x="108" y="41" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="middle">X</text>
+      <rect x="152" width="64" height="64" rx="12" fill="#f2b01e"/>
+      <text x="184" y="41" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="middle">P</text>
+    </g>
+  </g>
+</svg>

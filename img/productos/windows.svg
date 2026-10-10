@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" role="img" aria-label="Tarjeta de licencia de Windows 11 Pro">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#e3f4ea"/>
+      <stop offset="1" stop-color="#f4f8f6"/>
+    </radialGradient>
+    <linearGradient id="cabecera" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0b5d3b"/>
+      <stop offset="1" stop-color="#0f754b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="url(#glow)"/>
+  <circle cx="300" cy="220" r="190" fill="#0b5d3b" opacity="0.06"/>
+
+  <g transform="rotate(-4 300 225)">
+    <!-- Sombra -->
+    <rect x="128" y="100" width="360" height="270" rx="20" fill="#063b27" opacity="0.15"/>
+    <!-- Tarjeta -->
+    <rect x="120" y="90" width="360" height="270" rx="20" fill="#ffffff"/>
+    <path d="M120 110 a20 20 0 0 1 20 -20 h320 a20 20 0 0 1 20 20 v50 h-360 z" fill="url(#cabecera)"/>
+    <text x="150" y="128" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="2">WINDOWS 11 PRO</text>
+
+    <!-- Logo de 4 paneles -->
+    <g transform="translate(150 165)">
+      <rect width="60" height="60" rx="8" fill="#83dbaa"/>
+      <rect x="70" width="60" height="60" rx="8" fill="#0b5d3b"/>
+      <rect y="70" width="60" height="60" rx="8" fill="#0b5d3b"/>
+      <rect x="70" y="70" width="60" height="60" rx="8" fill="#83dbaa"/>
+    </g>
+
+    <!-- Líneas de clave -->
+    <rect x="300" y="180" width="140" height="12" rx="6" fill="#dcebe2"/>
+    <rect x="300" y="205" width="100" height="12" rx="6" fill="#dcebe2"/>
+
+    <!-- Código de barras -->
+    <g fill="#101817">
+      <rect x="150" y="270" width="6" height="40"/>
+      <rect x="162" y="270" width="3" height="40"/>
+      <rect x="171" y="270" width="8" height="40"/>
+      <rect x="185" y="270" width="4" height="40"/>
+      <rect x="195" y="270" width="10" height="40"/>
+      <rect x="211" y="270" width="3" height="40"/>
+      <rect x="220" y="270" width="7" height="40"/>
+    </g>
+
+    <text x="300" y="288" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#697570" letter-spacing="1">ACTIVACIÓN INMEDIATA</text>
+    <rect x="300" y="302" width="150" height="28" rx="14" fill="#d71920"/>
+    <text x="375" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">LICENCIA ORIGINAL</text>
+  </g>
+</svg>

@@ -1,13 +1,14 @@
 /* =========================================================
    BOOTSERVICE - APP.JS
-========================================================= */
+   Año actual, tema claro/oscuro, carrito (drawer),
+   favoritos y animaciones al hacer scroll.
+   ========================================================= */
 
 "use strict";
 
-
 /* =========================================================
    AÑO ACTUAL
-========================================================= */
+   ========================================================= */
 
 const currentYear = document.getElementById("currentYear");
 
@@ -19,69 +20,456 @@ if (currentYear) {
 
 
 /* =========================================================
-   CARRITO
-========================================================= */
+   ALMACENAMIENTO SEGURO (localStorage)
+   Evita errores en modo privado o con el
+   almacenamiento deshabilitado.
+   ========================================================= */
 
-let cartCount = 0;
+const storage = {
+
+    get(key) {
+
+        try {
+
+            return window.localStorage.getItem(key);
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    },
+
+    set(key, value) {
+
+        try {
+
+            window.localStorage.setItem(key, value);
+
+        } catch (error) {
+
+            /* Almacenamiento no disponible */
+
+        }
+
+    }
+
+};
 
 
-/*
-    Recuperar carrito guardado
-*/
+/* =========================================================
+   TEMA CLARO / OSCURO
+   La luna cambia a oscuro, el sol vuelve a claro.
+   ========================================================= */
 
-const savedCart = localStorage.getItem("bootservice_cart_count");
+const THEME_KEY = "bootservice_theme";
 
-if (savedCart) {
+const themeToggle = document.getElementById("themeToggle");
 
-    cartCount = parseInt(savedCart);
+const themeIcon = document.getElementById("themeIcon");
+
+
+function temaActual() {
+
+    return document.documentElement.getAttribute("data-theme") === "dark"
+        ? "dark"
+        : "light";
 
 }
 
 
-updateCartCounter();
+function aplicarTema(tema) {
+
+    document.documentElement.setAttribute("data-theme", tema);
 
 
-/*
-    Botones agregar al carrito
-*/
+    if (themeIcon) {
 
-const addCartButtons = document.querySelectorAll(".add-cart");
+        themeIcon.className = tema === "dark"
+            ? "bi-sun-fill"
+            : "bi-moon-stars";
+
+    }
 
 
-addCartButtons.forEach(button => {
+    if (themeToggle) {
+
+        const etiqueta = tema === "dark"
+            ? "Cambiar a tema claro"
+            : "Cambiar a tema oscuro";
+
+        themeToggle.setAttribute("aria-label", etiqueta);
+
+        themeToggle.setAttribute("title", etiqueta);
+
+    }
+
+}
+
+
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", function () {
+
+        const nuevo = temaActual() === "dark" ? "light" : "dark";
+
+        aplicarTema(nuevo);
+
+        storage.set(THEME_KEY, nuevo);
+
+    });
+
+}
+
+
+/* Sincroniza el icono (el script de <head> ya evita el parpadeo) */
+
+aplicarTema(temaActual());
+
+
+/* =========================================================
+   CARRITO
+   Productos con cantidad, subtotal y persistencia.
+   ========================================================= */
+
+const CART_KEY = "bootservice_cart_items";
+
+let carrito = [];
+
+
+try {
+
+    carrito = JSON.parse(storage.get(CART_KEY) || "[]");
+
+
+    if (!Array.isArray(carrito)) {
+        carrito = [];
+    }
+
+} catch (error) {
+
+    carrito = [];
+
+}
+
+
+const cartItems = document.getElementById("cartItems");
+
+const cartEmpty = document.getElementById("cartEmpty");
+
+const cartBadge = document.getElementById("cartBadge");
+
+const cartSubtotal = document.getElementById("cartSubtotal");
+
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+const clearCartBtn = document.getElementById("clearCartBtn");
+
+const cartCount = document.getElementById("cartCount");
+
+
+function guardarCarrito() {
+
+    storage.set(CART_KEY, JSON.stringify(carrito));
+
+}
+
+
+function totalCantidad() {
+
+    return carrito.reduce((acc, item) => acc + item.qty, 0);
+
+}
+
+
+function totalPrecio() {
+
+    return carrito.reduce(
+        (acc, item) => acc + item.price * item.qty,
+        0
+    );
+
+}
+
+
+function formatoPrecio(valor) {
+
+    return `Bs. ${valor.toLocaleString("es-BO")}`;
+
+}
+
+
+function bumpBadge() {
+
+    if (!cartCount) {
+        return;
+    }
+
+    cartCount.classList.remove("bump");
+
+    /* Reinicia la animación */
+    void cartCount.offsetWidth;
+
+    cartCount.classList.add("bump");
+
+}
+
+
+function renderCarrito() {
+
+    const cantidad = totalCantidad();
+
+
+    /* Badge del navbar */
+
+    if (cartCount) {
+
+        cartCount.textContent = cantidad;
+
+        cartCount.classList.toggle("d-none", cantidad === 0);
+
+    }
+
+
+    /* Badge del drawer */
+
+    if (cartBadge) {
+        cartBadge.textContent = cantidad;
+    }
+
+
+    /* Subtotal */
+
+    if (cartSubtotal) {
+        cartSubtotal.textContent = formatoPrecio(totalPrecio());
+    }
+
+
+    /* Checkout */
+
+    if (checkoutBtn) {
+        checkoutBtn.disabled = cantidad === 0;
+    }
+
+
+    if (!cartItems || !cartEmpty) {
+        return;
+    }
+
+
+    cartItems.innerHTML = "";
+
+
+    const vacio = carrito.length === 0;
+
+    cartEmpty.style.display = vacio ? "flex" : "none";
+
+    cartItems.style.display = vacio ? "none" : "flex";
+
+
+    carrito.forEach((item, indice) => {
+
+        const elemento = document.createElement("div");
+
+        elemento.className = "cart-item";
+
+
+        elemento.innerHTML = `
+            <div class="cart-item-img">
+                <img
+                    src=""
+                    alt=""
+                    width="54"
+                    height="54"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="cart-item-body">
+                <div class="cart-item-name"></div>
+                <div class="cart-item-price">${formatoPrecio(item.price)}</div>
+
+                <div class="cart-item-actions">
+                    <button
+                        type="button"
+                        class="qty-btn qty-minus"
+                        aria-label="Disminuir cantidad"
+                    >−</button>
+
+                    <span class="qty-value">${item.qty}</span>
+
+                    <button
+                        type="button"
+                        class="qty-btn qty-plus"
+                        aria-label="Aumentar cantidad"
+                    >+</button>
+
+                    <button
+                        type="button"
+                        class="cart-item-remove"
+                        aria-label="Eliminar del carrito"
+                    >
+                        <i class="bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+
+
+        const img = elemento.querySelector(".cart-item-img img");
+
+        img.src = item.image || "img/logo.png";
+
+        img.alt = item.name || "Producto";
+
+
+        elemento
+            .querySelector(".cart-item-name")
+            .textContent = item.name || "Producto";
+
+
+        elemento
+            .querySelector(".qty-minus")
+            .addEventListener("click", () => {
+                cambiarCantidad(indice, -1);
+            });
+
+
+        elemento
+            .querySelector(".qty-plus")
+            .addEventListener("click", () => {
+                cambiarCantidad(indice, 1);
+            });
+
+
+        elemento
+            .querySelector(".cart-item-remove")
+            .addEventListener("click", () => {
+                eliminarDelCarrito(indice);
+            });
+
+
+        cartItems.appendChild(elemento);
+
+    });
+
+}
+
+
+function agregarAlCarrito({ name, price, image }) {
+
+    const existente = carrito.find(item => item.name === name);
+
+
+    if (existente) {
+
+        existente.qty++;
+
+    } else {
+
+        carrito.push({ name, price, image, qty: 1 });
+
+    }
+
+
+    guardarCarrito();
+
+    renderCarrito();
+
+    bumpBadge();
+
+
+    Toaster.push({
+        title: "Producto agregado",
+        message: `${name} — ${formatoPrecio(price)}`,
+        type: "success",
+        icon: "bi-cart-check"
+    });
+
+}
+
+
+function cambiarCantidad(indice, delta) {
+
+    if (!carrito[indice]) {
+        return;
+    }
+
+
+    carrito[indice].qty += delta;
+
+
+    if (carrito[indice].qty <= 0) {
+        carrito.splice(indice, 1);
+    }
+
+
+    guardarCarrito();
+
+    renderCarrito();
+
+}
+
+
+function eliminarDelCarrito(indice) {
+
+    const item = carrito[indice];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    carrito.splice(indice, 1);
+
+    guardarCarrito();
+
+    renderCarrito();
+
+
+    Toaster.push({
+        title: "Carrito actualizado",
+        message: `${item.name} fue eliminado.`,
+        type: "info",
+        icon: "bi-trash"
+    });
+
+}
+
+
+/* Botones "agregar al carrito" */
+
+document.querySelectorAll(".add-cart").forEach(button => {
 
     button.addEventListener("click", function () {
 
-        const productName =
-            this.dataset.product || "Producto";
+        agregarAlCarrito({
+            name: this.dataset.product || "Producto",
+            price: parseFloat(this.dataset.price) || 0,
+            image: this.dataset.image || "img/logo.png"
+        });
 
 
-        cartCount++;
+        /* Animación del botón (solo el icono:
+           preserva la onda del ripple) */
 
-        localStorage.setItem(
-            "bootservice_cart_count",
-            cartCount
-        );
+        const icono = this.querySelector("i");
 
-
-        updateCartCounter();
+        const claseOriginal = icono ? icono.className : "";
 
 
-        showCartToast(productName);
-
-
-        /*
-            Animación del botón
-        */
-
-        this.innerHTML =
-            '<i class="bi bi-check-lg"></i>';
+        if (icono) {
+            icono.className = "bi-check-lg";
+        }
 
 
         setTimeout(() => {
 
-            this.innerHTML =
-                '<i class="bi bi-cart-plus"></i>';
+            if (icono) {
+                icono.className = claseOriginal;
+            }
 
         }, 1000);
 
@@ -90,71 +478,66 @@ addCartButtons.forEach(button => {
 });
 
 
-/* =========================================================
-   ACTUALIZAR CONTADOR
-========================================================= */
+/* Checkout (pendiente en esta etapa del curso) */
 
-function updateCartCounter() {
+if (checkoutBtn) {
 
-    const cartCounters =
-        document.querySelectorAll(".cart-count");
+    checkoutBtn.addEventListener("click", () => {
+
+        if (carrito.length === 0) {
+            return;
+        }
 
 
-    cartCounters.forEach(counter => {
-
-        counter.textContent = cartCount;
+        Toaster.push({
+            title: "Checkout",
+            message:
+                "El pago seguro estará disponible en la siguiente etapa del curso.",
+            type: "info",
+            icon: "bi-lock"
+        });
 
     });
 
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
+/* Vaciar carrito */
 
-function showCartToast(productName) {
+if (clearCartBtn) {
 
-    const toastElement =
-        document.getElementById("cartToast");
+    clearCartBtn.addEventListener("click", () => {
 
-
-    if (!toastElement) {
-        return;
-    }
+        if (carrito.length === 0) {
+            return;
+        }
 
 
-    const toastBody =
-        toastElement.querySelector(".toast-body");
+        carrito = [];
+
+        guardarCarrito();
+
+        renderCarrito();
 
 
-    if (toastBody) {
+        Toaster.push({
+            title: "Carrito vaciado",
+            message: "Todos los productos fueron eliminados.",
+            type: "warning",
+            icon: "bi-trash"
+        });
 
-        toastBody.innerHTML = `
-            <strong>${productName}</strong>
-            fue agregado al carrito.
-        `;
-
-    }
-
-
-    const toast =
-        bootstrap.Toast.getOrCreateInstance(
-            toastElement,
-            {
-                delay: 2500
-            }
-        );
-
-
-    toast.show();
+    });
 
 }
 
 
+renderCarrito();
+
+
 /* =========================================================
    FAVORITOS
-========================================================= */
+   ========================================================= */
 
 const favoriteButtons =
     document.querySelectorAll(".favorite-btn");
@@ -162,10 +545,7 @@ const favoriteButtons =
 
 favoriteButtons.forEach(button => {
 
-    button.addEventListener("click", function (event) {
-
-        event.preventDefault();
-
+    button.addEventListener("click", function () {
 
         const icon =
             this.querySelector("i");
@@ -186,11 +566,15 @@ favoriteButtons.forEach(button => {
 
             icon.classList.add("bi-heart");
 
+            this.setAttribute("aria-pressed", "false");
+
         } else {
 
             icon.classList.remove("bi-heart");
 
             icon.classList.add("bi-heart-fill");
+
+            this.setAttribute("aria-pressed", "true");
 
         }
 
@@ -200,103 +584,170 @@ favoriteButtons.forEach(button => {
 
 
 /* =========================================================
-   BUSCADOR
-========================================================= */
+   RIPPLE DE MATERIAL DESIGN
+   Se delega el evento: funciona con elementos
+   estáticos y dinámicos (mega menú, carrito).
+   ========================================================= */
 
-const searchForm =
-    document.querySelector(".search-wrapper");
-
-
-if (searchForm) {
-
-    searchForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-
-        const input =
-            this.querySelector("input");
-
-
-        if (!input) {
-            return;
-        }
-
-
-        const searchValue =
-            input.value.trim();
-
-
-        if (searchValue === "") {
-
-            input.focus();
-
-            return;
-
-        }
+const RIPPLE_SELECTORS = [
+    ".btn-primary-custom",
+    ".btn-outline-custom",
+    ".add-cart",
+    ".search-button",
+    ".category-select-btn",
+    ".category-main-button",
+    ".theme-toggle",
+    ".favorite-btn",
+    ".carousel-control-prev",
+    ".carousel-control-next",
+    ".bs-social-link",
+    ".social-links a",
+    ".category-card",
+    ".category-link",
+    ".btn-mega-promo",
+    ".qty-btn",
+    ".btn-checkout",
+    ".btn-clean",
+    ".category-option",
+    ".mega-category-item"
+].join(", ");
 
 
-        console.log(
-            "Buscando producto:",
-            searchValue
-        );
+function crearRipple(contenedor, x, y) {
+
+    const rect = contenedor.getBoundingClientRect();
+
+    const tamaño =
+        Math.max(rect.width, rect.height) * 2.2;
 
 
-        /*
-            Por ahora mostramos el término.
-            Posteriormente conectaremos esto
-            con el catálogo/productos.
-        */
+    const onda = document.createElement("span");
 
-        alert(
-            `Buscar: ${searchValue}`
-        );
+    onda.className = "ripple-onda";
 
-    });
+    onda.style.width = `${tamaño}px`;
+
+    onda.style.height = `${tamaño}px`;
+
+    onda.style.left = `${x - rect.left - tamaño / 2}px`;
+
+    onda.style.top = `${y - rect.top - tamaño / 2}px`;
+
+
+    contenedor.appendChild(onda);
+
+    setTimeout(() => onda.remove(), 600);
 
 }
 
 
+/* Mouse / táctil */
+
+document.addEventListener("pointerdown", event => {
+
+    const objetivo =
+        event.target.closest(RIPPLE_SELECTORS);
+
+
+    if (objetivo) {
+
+        crearRipple(
+            objetivo,
+            event.clientX,
+            event.clientY
+        );
+
+    }
+
+});
+
+
+/* Teclado (Enter / Espacio en botones) */
+
+document.addEventListener("keydown", event => {
+
+    if (
+        event.key !== "Enter" &&
+        event.key !== " "
+    ) {
+        return;
+    }
+
+
+    if (!(event.target instanceof HTMLButtonElement)) {
+        return;
+    }
+
+
+    const objetivo =
+        event.target.closest(RIPPLE_SELECTORS);
+
+
+    if (!objetivo) {
+        return;
+    }
+
+
+    const rect = objetivo.getBoundingClientRect();
+
+
+    crearRipple(
+        objetivo,
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2
+    );
+
+});
+
+
 /* =========================================================
-   ANIMACIÓN SUAVE
-========================================================= */
+   ANIMACIÓN AL HACER SCROLL
+   La clase "animate-on-scroll" la agrega JS:
+   sin JS el contenido se ve normalmente.
+   ========================================================= */
 
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.1
-        }
+const animatedElements =
+    document.querySelectorAll(
+        ".category-card, .product-card, .service-card"
     );
 
 
-document
-    .querySelectorAll(".category-card, .product-card, .service-card")
-    .forEach(element => {
+if (
+    "IntersectionObserver" in window &&
+    animatedElements.length > 0
+) {
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+
+    animatedElements.forEach(element => {
+
+        element.classList.add("animate-on-scroll");
 
         observer.observe(element);
 
     });
 
-
-/* =========================================================
-   CONSOLA
-========================================================= */
-
-console.log(
-    "BootService Ecommerce iniciado correctamente."
-);
+}
