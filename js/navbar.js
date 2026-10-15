@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         categorias
             .slice(0, 10)
-            .forEach(categoria => {
+            .forEach((categoria, index) => {
 
                 const link =
                     document.createElement("a");
@@ -397,8 +397,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 link.className =
                     "category-link";
 
-                link.textContent =
-                    categoria.nombre;
+
+                if (index === 0) {
+
+                    link.classList.add("active");
+
+                }
+
+
+                link.innerHTML = `
+                    <i class="${categoria.icono}"></i>
+                    <span>${categoria.nombre}</span>
+                `;
+
+
+                /* Al hacer clic, la categoría queda resaltada */
+
+                link.addEventListener("click", () => {
+
+                    categoryLinks
+                        .querySelectorAll(".category-link")
+                        .forEach(item =>
+                            item.classList.remove("active")
+                        );
+
+                    link.classList.add("active");
+
+                });
+
 
                 categoryLinks.appendChild(link);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="light" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
 
@@ -10,7 +10,15 @@
         content="BootService Store — Tienda de computación y licencias: computadoras, laptops, componentes, accesorios y software original con activación inmediata."
     >
 
-    <meta name="theme-color" content="#0b1512">
+    <meta name="theme-color" content="#06120d">
+
+    <!-- Tipografías premium: Space Grotesk (títulos) + Inter (texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <!-- Open Graph -->
     <meta
@@ -53,12 +61,15 @@
                     tema = "dark";
                 }
 
-                document.documentElement.setAttribute(
-                    "data-theme",
-                    tema === "dark" ? "dark" : "light"
-                );
+                tema = tema === "dark" ? "dark" : "light";
+
+                document.documentElement.setAttribute("data-theme", tema);
+
+                /* Bootstrap 5.3: sincroniza sus componentes con el tema */
+                document.documentElement.setAttribute("data-bs-theme", tema);
             } catch (error) {
                 document.documentElement.setAttribute("data-theme", "light");
+                document.documentElement.setAttribute("data-bs-theme", "light");
             }
         })();
     </script>
@@ -714,16 +725,36 @@
 
                         <div class="col-lg-6 hero-slide-media">
 
-                            <div class="hero-glow" aria-hidden="true"></div>
+                            <div class="hero-media">
 
-                            <img
-                                src="img/hero/hero-computer.svg"
-                                alt="Setup de computadora con licencia de software"
-                                class="img-fluid"
-                                width="600"
-                                height="450"
-                                fetchpriority="high"
-                            >
+                                <div class="hero-glow" aria-hidden="true"></div>
+
+                                <img
+                                    src="img/hero/hero-computer.svg"
+                                    alt="Setup de computadora con licencia de software"
+                                    class="img-fluid"
+                                    width="600"
+                                    height="450"
+                                    fetchpriority="high"
+                                >
+
+                                <div class="hero-float-card hero-float-card--tl">
+                                    <i class="bi-star-fill"></i>
+                                    <div>
+                                        <strong>4.9 / 5</strong>
+                                        <span>+320 reseñas</span>
+                                    </div>
+                                </div>
+
+                                <div class="hero-float-card hero-float-card--br">
+                                    <i class="bi-truck"></i>
+                                    <div>
+                                        <strong>Envío 24-48h</strong>
+                                        <span>A toda Bolivia</span>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -773,17 +804,37 @@
 
                         <div class="col-lg-6 hero-slide-media">
 
-                            <div class="hero-glow" aria-hidden="true"></div>
+                            <div class="hero-media">
 
-                            <img
-                                src="img/hero/hero-licenses.svg"
-                                alt="Licencias de software originales con activación inmediata"
-                                class="img-fluid"
-                                width="600"
-                                height="450"
-                                loading="lazy"
-                                decoding="async"
-                            >
+                                <div class="hero-glow" aria-hidden="true"></div>
+
+                                <img
+                                    src="img/hero/hero-licenses.svg"
+                                    alt="Licencias de software originales con activación inmediata"
+                                    class="img-fluid"
+                                    width="600"
+                                    height="450"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <div class="hero-float-card hero-float-card--tl">
+                                    <i class="bi-lightning-charge-fill"></i>
+                                    <div>
+                                        <strong>Activación</strong>
+                                        <span>inmediata</span>
+                                    </div>
+                                </div>
+
+                                <div class="hero-float-card hero-float-card--br">
+                                    <i class="bi-patch-check-fill"></i>
+                                    <div>
+                                        <strong>100% original</strong>
+                                        <span>Con garantía</span>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -839,17 +890,37 @@
 
                         <div class="col-lg-6 hero-slide-media">
 
-                            <div class="hero-glow" aria-hidden="true"></div>
+                            <div class="hero-media">
 
-                            <img
-                                src="img/hero/hero-service.svg"
-                                alt="Servicio técnico especializado en computadoras"
-                                class="img-fluid"
-                                width="600"
-                                height="450"
-                                loading="lazy"
-                                decoding="async"
-                            >
+                                <div class="hero-glow" aria-hidden="true"></div>
+
+                                <img
+                                    src="img/hero/hero-service.svg"
+                                    alt="Servicio técnico especializado en computadoras"
+                                    class="img-fluid"
+                                    width="600"
+                                    height="450"
+                                    loading="lazy"
+                                    decoding="async"
+                                >
+
+                                <div class="hero-float-card hero-float-card--tl">
+                                    <i class="bi-wrench-adjustable"></i>
+                                    <div>
+                                        <strong>Diagnóstico</strong>
+                                        <span>gratis en Tarija</span>
+                                    </div>
+                                </div>
+
+                                <div class="hero-float-card hero-float-card--br">
+                                    <i class="bi-person-badge"></i>
+                                    <div>
+                                        <strong>Técnicos</strong>
+                                        <span>certificados</span>
+                                    </div>
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -881,6 +952,45 @@
                 <i class="bi-chevron-right"></i>
                 <span class="visually-hidden">Siguiente</span>
             </button>
+
+        </div>
+
+
+        <!-- TIRA DE CONFIANZA -->
+
+        <div class="hero-trust">
+
+            <div class="hero-trust-item">
+                <i class="bi-shield-check"></i>
+                <div>
+                    <strong>Garantía oficial</strong>
+                    <span>Hasta 12 meses</span>
+                </div>
+            </div>
+
+            <div class="hero-trust-item">
+                <i class="bi-truck"></i>
+                <div>
+                    <strong>Envío nacional</strong>
+                    <span>24-48 horas</span>
+                </div>
+            </div>
+
+            <div class="hero-trust-item">
+                <i class="bi-credit-card-2-front"></i>
+                <div>
+                    <strong>Pago seguro</strong>
+                    <span>Tarjeta, QR o efectivo</span>
+                </div>
+            </div>
+
+            <div class="hero-trust-item">
+                <i class="bi-people-fill"></i>
+                <div>
+                    <strong>+2.500 clientes</strong>
+                    <span>Confían en nosotros</span>
+                </div>
+            </div>
 
         </div>
 
@@ -1415,7 +1525,7 @@
 
                     <div class="product-image">
 
-                        <span class="product-badge">
+                        <span class="product-badge popular">
                             Popular
                         </span>
 
@@ -1501,7 +1611,7 @@
 
                     <div class="product-image">
 
-                        <span class="product-badge">
+                        <span class="product-badge digital">
                             Digital
                         </span>
 
@@ -1891,7 +2001,7 @@
      SERVICIOS
      ========================================================= -->
 
-<section class="section-padding">
+<section class="section-padding services-section">
 
     <div class="container">
 

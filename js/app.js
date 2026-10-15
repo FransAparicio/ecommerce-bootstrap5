@@ -83,6 +83,10 @@ function aplicarTema(tema) {
 
     document.documentElement.setAttribute("data-theme", tema);
 
+    /* Bootstrap 5.3: sincroniza sus componentes (offcanvas,
+       dropdown, form controls, btn-close) con el tema. */
+    document.documentElement.setAttribute("data-bs-theme", tema);
+
 
     if (themeIcon) {
 

@@ -6,9 +6,15 @@ Tienda en línea para venta de **hardware de computación** y **licencias de sof
 
 ## ✨ Características
 
-* **Tema claro / oscuro** con interruptor en el topbar (luna / sol), persiste en `localStorage` y respeta la preferencia del sistema.
-* **Carrusel en el hero** con 3 slides: Setup, Licencias y Servicio técnico.
-* **Buscador con select estilo Select2**: lista de categorías con iconos, filtro de búsqueda y atajo de teclado `/`.
+* **Diseño premium con identidad tecnológica**: el **verde circuito (esmeralda)** es el color primario de marca, usado con moderación (CTAs, enlaces y estructura) para no sobrecargar la interfaz.
+* **Paleta variada multicolor**: además del verde de marca, cada **categoría, servicio, beneficio y producto** recibe su propio acento (cian, azul, índigo, violeta, rosa, ámbar y naranja) mediante variables CSS (`--c-*` + `--accent`), y las **etiquetas de producto** ("Nuevo", "Oferta", "Popular", "Digital") tienen su propio color. El resultado es un catálogo vivo pero coherente.
+* **Contraste accesible**: todos los acentos usados como texto cumplen **WCAG AA** (≥ 4.5:1) tanto en tema claro como oscuro.
+* **Tipografías premium**: *Space Grotesk* para títulos e *Inter* para texto (con respaldo en fuentes del sistema).
+* **Tema claro / oscuro** con interruptor en el topbar (luna / sol), persiste en `localStorage`, respeta la preferencia del sistema y sincroniza el tema nativo de Bootstrap 5.3 (`data-bs-theme`).
+* **Logotipo siempre visible y protagonista**: tamaño mayor y suave efecto de *acercamiento* (zoom) al pasar el mouse; sobre fondos oscuros (cabecera en tema oscuro y footer) la marca se muestra sobre una "placa" clara, de modo que los colores verde y rojo del logo nunca se pierden.
+* **Hero premium**: carrusel con 3 slides (Setup, Licencias y Servicio técnico) con tarjetas flotantes sobre el producto, textura de circuito sutil, degradados de marca, controles de navegación **siempre visibles y a prueba de clics** y una tira de confianza (garantía, envío, pago y clientes).
+* **Buscador destacado con select estilo Select2**: barra más alta y elevada, selector de categorías resaltado, lista con iconos, filtro de búsqueda y atajo de teclado `/`.
+* **Navegación clara**: acciones de *Mi cuenta* y *Carrito* como "chips" con realce al pasar el mouse, y una **barra de categorías a todo lo ancho** con iconografía y estados *hover*/activo resaltados.
 * **Mega menú** dinámico con categorías, subcategorías y promo de licencias.
 * **Carrito drawer** funcional: cantidades, subtotal, eliminación y persistencia en `localStorage`.
 * **Toaster 2.0**: notificaciones apiladas con barra de progreso y pausa al pasar el mouse.
